@@ -1,0 +1,36 @@
+---
+templates:
+  tv:
+    verify_ssl_certificates: no
+
+tasks:
+  tv_shows:
+    quality: 720p|1080p
+    set:
+      path: /transmission/TV_Shows/{{ series_name|replace(' ','_') }}/Season_{{series_season}}
+    inputs:
+      - rss:  https://showrss.info/show/923.rss  
+    exists_series:
+      - "/transmission/TV_Shows"
+    # fetch all the feed series
+    all_series: yes
+    limit_new: 10
+    transmission:
+      host: localhost
+      port: 9091
+      username: user
+      password: password
+    only_new: yes
+
+  clean:
+    priority: 3
+    clean_transmission:
+      host: localhost
+      port: 9091
+      username: "user" 
+      password: "password" 
+      finished_for: 1 minutes
+      #min_ratio: 0.5
+      delete_files: No
+      #transmission_seed_limits: Yes
+    disable: details
