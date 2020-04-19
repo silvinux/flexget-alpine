@@ -1,36 +1,53 @@
 ---
-templates:
-  tv:
-    verify_ssl_certificates: no
-
 tasks:
-  tv_shows:
-    quality: 720p|1080p
+  prefiltered_feed:
+    verify_ssl_certificates: no
     set:
-      path: /transmission/TV_Shows/{{ series_name|replace(' ','_') }}/Season_{{series_season}}
+      path: /transmission/TV_Shows/
+    download: yes
     inputs:
-      - rss:  https://showrss.info/show/923.rss  
-    exists_series:
-      - "/transmission/TV_Shows"
-    # fetch all the feed series
-    all_series: yes
-    limit_new: 10
+      - rss:
+          # ----------------------------------------- #
+          # https://webtorrent.io/free-torrents
+          # https://flexget.com/Plugins/rss
+          # ----------------------------------------- #
+          ## RSS feed just "Big Buck Bunny"
+          url: https://politepol.com/fd/18cDQ0iwMHzF
+          # ----------------------------------------- #
+          ## RSS feed all of it 
+          #url: https://politepol.com/fd/Wc5g5dtmSyBQ
+          title: link
+    accept_all: yes
     transmission:
       host: localhost
       port: 9091
-      username: user
-      password: password
+      username: $USERNAME
+      password: $PASSWORD
     only_new: yes
-
+  #tv_shows:
+  #  quality: 720p|1080p
+  #  set:
+  #    path: /transmission/TV_Shows/{{ series_name|replace(' ','_') }}/Season_{{series_season}}
+  #  inputs:
+  #    - rss:  https://showrss.info/show/ZzXxYy.rss
+  #  exists_series:
+  #    - "/transmission/TV_Shows"
+  #  # fetch all the feed series
+  #  all_series: yes
+  #  limit_new: 10
+  #  transmission:
+  #    host: localhost
+  #    port: 9091
+  #    username: $USERNAME
+  #    password: $PASSWORD
+  #  only_new: yes
   clean:
     priority: 3
     clean_transmission:
       host: localhost
       port: 9091
-      username: "user" 
-      password: "password" 
+      username: $USERNAME
+      password: $PASSWORD
       finished_for: 1 minutes
-      #min_ratio: 0.5
       delete_files: No
-      #transmission_seed_limits: Yes
     disable: details

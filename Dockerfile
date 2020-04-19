@@ -2,13 +2,21 @@ FROM alpine:latest
 
 MAINTAINER @silvinux [silvinux7@gmail.com]
 
-ENV FUID 1000
-ENV FGID 1000
-ENV TZ Europe/Madrid
-ENV LOGLEVEL info
+ARG TUID=1000
+ARG TGID=1000
+ARG USERNAME=silvinux
+ARG PASSWORD=toor
+ARG TZ=Europe/Madrid
+ARG LOGLEVEL=info
 
+ENV TUID=${TUID}
+ENV TGID=${TGID}
+ENV USERNAME=${USERNAME}
+ENV PASSWORD=${PASSWORD}
+ENV TZ=${TZ}
+ENV LOGLEVEL=${LOGLEVEL}
 
-RUN adduser -D -u $FUID -g $FGID flexget && \
+RUN adduser -D -u $TUID -g $TGID flexget && \
     mkdir -p /home/flexget/.config/flexget && \
     mkdir -p /transmission/{downloads,TV_Shows} 
 
@@ -30,7 +38,7 @@ RUN set -x \
     && rm -rf /tmp/* 
 
 VOLUME ["/transmission/downloads", "/transmission/TV_Shows", "/home/flexget/.config/flexget"]
-RUN chown -R $FUID:$FGID /transmission /home/flexget/ \
+RUN chown -R $TUID:$TGID /transmission /home/flexget/ \
     && chmod +x /home/flexget/run_flexget.sh
 
 USER flexget
