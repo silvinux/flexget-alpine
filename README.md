@@ -36,12 +36,13 @@ drwxrwxr-x. 3 user group 31 Dec  9 23:53 config
 ### Run the container:
 
 ```
-docker run --rm --name flexget \
+podman run --rm --name flexget \
   --net=container:transmission \
+  -e USERNAME=btannen -e PASSWORD=biffco \
   -e PGID=1000 -e PUID=1000 \
-  -v /$HOME/flexget/config/:/home/flexget/.config/flexget/ \
-  -v /$HOME/Videos/Downloads:/transmission/downloads \
-  -v /$HOME/Videos/TV_Shows:/transmission/TV_Shows \
+  -v /home/silvio/Dockers/flexget/config/:/home/flexget/.config/flexget/ \
+  -v /home/silvio/Dockers/Videos/Downloads:/transmission/downloads \
+  -v /home/silvio/Dockers/Videos/TV_Shows:/transmission/TV_Shows \
   quay.io/silvinux/flexget-alpine
 
 ```
