@@ -21,8 +21,8 @@ tasks:
     transmission:
       host: localhost
       port: 9091
-      username: $USERNAME
-      password: $PASSWORD
+      username: TUSERNAME
+      password: TPASSWORD
     only_new: yes
   #tv_shows:
   #  quality: 720p|1080p
@@ -38,16 +38,16 @@ tasks:
   #  transmission:
   #    host: localhost
   #    port: 9091
-  #    username: $USERNAME
-  #    password: $PASSWORD
+  #    username: TUSERNAME
+  #    password: TPASSWORD
   #  only_new: yes
   clean:
     priority: 3
     clean_transmission:
       host: localhost
       port: 9091
-      username: $USERNAME
-      password: $PASSWORD
+      username: TUSERNAME
+      password: TPASSWORD
       finished_for: 1 minutes
       delete_files: No
     disable: details

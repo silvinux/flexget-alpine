@@ -20,6 +20,7 @@ RUN adduser -D -u $TUID -g $TGID flexget && \
     mkdir -p /home/flexget/.config/flexget && \
     mkdir -p /transmission/{downloads,TV_Shows} 
 
+ADD files/config.yml /home/flexget/.config/flexget/config.yml
 ADD files/run_flexget.sh /home/flexget/run_flexget.sh
 
 RUN set -x \
